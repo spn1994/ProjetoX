@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de Casamento</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e86c6c;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .option {
+            display: inline-block;
+            cursor: pointer;
+            margin: 10px;
+            padding: 15px 30px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            background-color: #ccc;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #mensagem {
+            display: none;
+            margin-top: 30px;
+            font-size: 24px;
+            color: #e86c6c;
+        }
+
+        #imagem {
+            display: none;
+            margin-top: 20px;
+            width: 100%; /* Adicionando 100% de largura */
+            max-width: 500px; /* Definindo uma largura máxima para a imagem */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Você aceita se casar comigo?</h1>
+        <div class="option" id="aceitar" onclick="realizarPedido('aceito')">Sim</div>
+        <div class="option" id="nao" onclick="trocarLugarNao()">Não</div>
+        <div id="mensagem"></div>
+        <img id="imagem" src="" alt="">
+    </div>
+
+    <script>
+        function realizarPedido(resposta) {
+            if (resposta === 'aceito') {
+                alert("Eu te amoooo.");
+
+                // Exibindo mensagem e imagem
+                const mensagemDiv = document.getElementById("mensagem");
+                mensagemDiv.textContent = "Eu te amo, vamos planejar o futuro?";
+                mensagemDiv.style.display = "block";
+
+                const imagem = document.getElementById("imagem");
+                imagem.src = "./assets/IMG_0466.JPG"; 
+                imagem.style.display = "block";
+            }
+        }
+
+        function getRandomPosition() {
+            const maxWidth = window.innerWidth;
+            const maxHeight = window.innerHeight;
+            const button = document.getElementById("nao");
+            const buttonWidth = button.offsetWidth;
+            const buttonHeight = button.offsetHeight;
+
+            const randomX = Math.floor(Math.random() * (maxWidth - buttonWidth));
+            const randomY = Math.floor(Math.random() * (maxHeight - buttonHeight));
+
+            return {
+                x: randomX,
+                y: randomY
+            };
+        }
+
+        function trocarLugarNao() {
+            const naoButton = document.getElementById("nao");
+            naoButton.style.position = "absolute";
+            const position = getRandomPosition();
+            naoButton.style.top = position.y + "px";
+            naoButton.style.left = position.x + "px";
+        }
+    </script>
+</body>
+</html>
